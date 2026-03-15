@@ -6,6 +6,8 @@ import multer from 'multer';
 import { createServer } from 'http';
 import { Server } from 'socket.io';
 import fs from "fs";
+import dotenv from "dotenv";
+dotenv.config();
 
 dotenv.config();
 
@@ -19,6 +21,7 @@ const io = new Server(server, {
 });
 
 const PORT = process.env.PORT || 5000;
+const DBLINK = process.env.DB_LINK;
 
 // Middleware
 app.use(cors());
@@ -42,7 +45,7 @@ const storage = multer.diskStorage({
 const upload = multer({ storage });
 
 // MongoDB Connection
-const mongoURI = 'mongodb+srv://saadprocoder_db_user:wkr2PwGTxrVZfSed@kitchliance.do6pail.mongodb.net/kitchliance';
+const mongoURI = DBLINK;
 
 mongoose.connect(mongoURI, {
     useNewUrlParser: true,
